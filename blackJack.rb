@@ -16,3 +16,4 @@ class Card
 end
 
 c1 = Card.new(:hearts,9)
+c2 = 
