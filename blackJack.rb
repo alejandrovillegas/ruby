@@ -13,6 +13,10 @@ class Card
 		return 11 if @value == "A"
 		return @value
 	end
+
+	def to_s
+		"#{@value}-#{@suit}"
+	end
 end
 
 class Deck
@@ -31,13 +35,13 @@ class Deck
 		def build_cards
 			[:clubs, :diamonds, :spades, :hearts].each do |suit|
 			(2..10).each do |number|
-				@Cards << Card.new(suit, number)
+				@cards << Card.new(suit, number)
 			end
 			["J","Q","K","A"].each do |face|
-				@Cards << Card.new(suit, face)	   	
+				@cards << Card.new(suit, face)	   	
 			end
 		end
-		@Cards.shuffle!
+		@cards.shuffle!
 	end	
 end
 
@@ -58,9 +62,53 @@ class Hand
 		@cards.each do |card|
 			val += card.value
 		end
+		val
+	end
+
+	def to_s
+		str = ""
+		@cards.each do |card|
+			str += "#{card}    "
+		end
+		str.strip
 	end
 end
 
+
 deck = Deck.new
-hand = Hand.new(deck)
+dealer = Hand.new(deck)
+player = Hand.new(deck)
+
+
+player.hit!
+player.hit!
+dealer.hit!
+
+puts "Repartidor:  #{dealer}"
+puts "Jugador:     #{player}"
+
+puts "tu turno"
+
+while player.value < 21
+	print "   carta(C) o plantas(P)?  "
+	option = gets.chomp
+
+	if option == "C"
+		player.hit!
+		puts " #{player}  "
+	elsif option == "P"
+		break
+	end
+end
+
+
+
+puts "!!!!!!!!!!!!!!!! #{player}"
+
+
+
+
+
+
+
 
