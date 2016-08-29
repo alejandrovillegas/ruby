@@ -86,7 +86,7 @@ dealer.hit!
 
 puts "Repartidor:  #{dealer}"
 puts "Jugador:     #{player}"
-
+puts 
 puts "tu turno"
 
 while player.value < 21
@@ -101,10 +101,28 @@ while player.value < 21
 	end
 end
 
+if player.value <= 21
+	puts
+	puts "Turno del repartidor:"
+	dealer.hit!
+	puts "  #{dealer}"
+	while dealer.value < 17
+		dealer.hit!
+		puts " #{dealer}  "
+	end
+end
 
-
-puts "!!!!!!!!!!!!!!!! #{player}"
-
+if player.value > 21
+	puts "Perdiste :( "
+elsif dealer.value > 21
+	puts "Ganaste"
+elsif player.value == dealer.value
+	puts "Empate"	
+elsif player.value > dealer.value
+	puts "ganaste"
+else
+	"perdiste"
+end	
 
 
 
